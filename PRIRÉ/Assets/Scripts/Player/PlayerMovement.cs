@@ -4,7 +4,6 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 6f;
     public float mouseSensitivity = 2f;
-    public float gravity = -9.81f;
 
     private CharacterController controller;
     private Vector3 velocity;
@@ -35,13 +34,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
         controller.Move(move * moveSpeed * Time.deltaTime);
-
-        // Gravity
-        //if (controller.isGrounded && velocity.y < 0)
-            //velocity.y = -2f;
-
-       // velocity.y += gravity * Time.deltaTime;
-        //controller.Move(velocity * Time.deltaTime);
     }
 
     void HandleMouseLook()
