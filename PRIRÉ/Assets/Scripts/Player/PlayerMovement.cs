@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 6f;
     public float mouseSensitivity = 2f;
     public float gravity = -9.81f;
+    public float jumpForce = 5f;
 
     private CharacterController controller;
     private Vector3 velocity;
@@ -30,18 +31,26 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleMovement()
     {
-        float x = Input.GetAxis("Horizontal"); // AD
-        float z = Input.GetAxis("Vertical"); // WS
-
-        Vector3 move = transform.right * x + transform.forward * z;
-        controller.Move(move * moveSpeed * Time.deltaTime);
-
-        // Gravity
         if (controller.isGrounded && velocity.y < 0)
-        velocity.y = -2f;
+        {
+            velocity.y = -2f;
+        }
+
+        if (controller.isGrounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            velocity.y = jumpForce;
+        }
 
         velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+        Vector3 move = transform.right *x + transform.forward *z;
+        move *= moveSpeed;
+
+        move.y = velocity.y;
+
+        controller.Move(move * Time.deltaTime);
     }
 
     void HandleMouseLook()
