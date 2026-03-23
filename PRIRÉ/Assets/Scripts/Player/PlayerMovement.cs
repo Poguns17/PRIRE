@@ -31,7 +31,10 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -2f;
 
         if (controller.isGrounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("jump...");
             velocity.y = jumpForce;
+        }
 
         velocity.y += gravity * Time.deltaTime;
 
