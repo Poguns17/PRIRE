@@ -38,8 +38,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (controller.isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
+            Debug.Log("jump...");
             velocity.y = jumpForce;
-        }
+        }   
 
         velocity.y += gravity * Time.deltaTime;
 
@@ -51,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
         move.y = velocity.y;
 
         controller.Move(move * Time.deltaTime);
+
     }
 
     void HandleMouseLook()
