@@ -4,7 +4,7 @@ using UnityEngine;
 public class Pistol: MonoBehaviour, IWeapon, IDamageSource
 {
     private string name = "Pistol";
-    private float damage = 10f;
+    private float damage = 100f;
     private float fireRate = 2f;
     private int ammoCapacity = 17;
     private float reloadTime = 3.2f;

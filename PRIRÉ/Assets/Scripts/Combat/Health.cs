@@ -11,6 +11,14 @@ public class Health: MonoBehaviour, IHealth
         currentHealth = maxHealth;
 
         }
+
+    void OnEnable()
+    {
+        Debug.Log("maxHealth = " + maxHealth);
+        currentHealth = maxHealth;
+        Debug.Log("currentHealth = " +  currentHealth);
+    }
+
     public float MaxHealth => maxHealth;
     public float CurrentHealth => currentHealth;
 
@@ -31,6 +39,7 @@ public class Health: MonoBehaviour, IHealth
         {
             Debug.Log(gameObject.name + "died!");
             OnDeath?.Invoke(transform.position, source.Type);
+            gameObject.SetActive(false);
         }
     }
 
