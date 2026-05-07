@@ -14,9 +14,9 @@ public class Health: MonoBehaviour, IHealth
 
     void OnEnable()
     {
-        Debug.Log("maxHealth = " + maxHealth);
+        //Debug.Log("maxHealth = " + maxHealth);
         currentHealth = maxHealth;
-        Debug.Log("currentHealth = " +  currentHealth);
+        //Debug.Log("currentHealth = " +  currentHealth);
     }
 
     public float MaxHealth => maxHealth;
