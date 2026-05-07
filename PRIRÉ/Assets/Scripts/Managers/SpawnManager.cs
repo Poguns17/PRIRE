@@ -82,14 +82,14 @@ public class SpawnManager : MonoBehaviour
         Vector2Int? cellIndex = GetValidSpawnCell();
         if (cellIndex == null)
         {
-            Debug.Log("No Valid Cell Found");
+            //Debug.Log("No Valid Cell Found");
             return;
         }
 
         GameObject enemy = GetEnemy();
         if (enemy == null)
         {
-            Debug.Log("No Enemy Avalaible");
+            //Debug.Log("No Enemy Avalaible");
             return;
         }
 
@@ -100,7 +100,7 @@ public class SpawnManager : MonoBehaviour
             enemy.SetActive(true);
             grid[x, z].IsOccupied = true;
 
-        Debug.Log("Spawned enemy at: " + enemy.transform.position);
+        //Debug.Log("Spawned enemy at: " + enemy.transform.position);
     }
 
         Vector2Int? GetValidSpawnCell()

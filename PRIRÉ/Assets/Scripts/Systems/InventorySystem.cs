@@ -5,29 +5,42 @@ using UnityEngine;
 public class InventorySystem : MonoBehaviour
 {
     [Header("Starting Weapons")]
-    [SerializeField] private List<GameObject> startingWeapons = new List<GameObject>();
+    [SerializeField] private List<GameObject> Weapons = new List<GameObject>();
 
     public event Action<string, int, int> OnWeaponChanged;
 
     private List<GameObject> ownedWeapons = new List<GameObject>();
     private int equippedIndex = 0;
 
+   
+
+
+
     public GameObject CurrentWeapon => ownedWeapons.Count > 0 ? ownedWeapons[equippedIndex] : null;
 
     private void Start()
     {
-        foreach (var weapon in startingWeapons)
+        foreach (var weapon in Weapons)
+        {
             if (weapon != null) AddWeapon(weapon, equip: false);
-        if (ownedWeapons.Count > 0) EquipWeapon(0);
+            Debug.Log($"{weapon.name} Equipped ");
+            if (ownedWeapons.Count > 0) EquipWeapon(0);
+        }
     }
 
-    private void Update()
-    {
-        for (int i = 0; i < ownedWeapons.Count && i < 9; i++)
-            if (Input.GetKeyDown(KeyCode.Alpha1 + i)) { EquipWeapon(i); return; }
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if (scroll > 0f) EquipWeapon((equippedIndex + 1) % ownedWeapons.Count);
-        else if (scroll < 0f) EquipWeapon((equippedIndex - 1 + ownedWeapons.Count) % ownedWeapons.Count);
+    private void Update() { 
+    
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll > 0f)
+        {
+            EquipWeapon((equippedIndex + 1) % ownedWeapons.Count);
+            //Debug.Log($"{weapon.name} equipped");
+        }
+        else if (scroll < 0f)
+        {
+            EquipWeapon((equippedIndex - 1 + ownedWeapons.Count) % ownedWeapons.Count);
+        }
+        
     }
 
     public void AddWeapon(GameObject weapon, bool equip = true)

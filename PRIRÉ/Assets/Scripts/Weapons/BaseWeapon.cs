@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 
 // Shared logic for all weapons. Each weapon inherits this and overrides Shoot().
+
+
 public abstract class BaseWeapon : MonoBehaviour, IWeapon, IDamageSource
 {
     [Header("Weapon Stats")]
@@ -62,9 +64,12 @@ public abstract class BaseWeapon : MonoBehaviour, IWeapon, IDamageSource
     {
         isReloading = true;
         PlaySound(reloadSound);
+
+        Debug.Log($"{Name} reloading");
         yield return new WaitForSeconds(reloadTime);
         ammoCount = ammoCapacity;
         isReloading = false;
+        
         Debug.Log($"[{Name}] Reloaded. Ammo: {ammoCount}/{ammoCapacity}");
     }
 
