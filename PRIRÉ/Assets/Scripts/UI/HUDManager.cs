@@ -156,4 +156,13 @@ public class HUDManager : MonoBehaviour
 
         UpdateHUD();
     }
+
+    private void OnGUI()
+    {
+        float size = 10f;
+        float x = Screen.width / 2 - size / 2;
+        float y = Screen.height / 2 - size / 2;
+        GUI.Box(new Rect(x, y, size, size), "");
+
+    }
 }
