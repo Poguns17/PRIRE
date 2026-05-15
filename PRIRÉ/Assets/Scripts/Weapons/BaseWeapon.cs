@@ -85,8 +85,11 @@ public abstract class BaseWeapon : MonoBehaviour, IWeapon, IDamageSource
     // Fires a single raycast and applies damage if enemy is hit
     protected void FireRaycast(Vector3 origin, Vector3 direction)
     {
-        if (Physics.Raycast(origin, direction, out RaycastHit hit, range))
+        RaycastHit hit;
+
+        if (Physics.Raycast(origin, direction, out hit, range))
         {
+            Debug.DrawRay(origin, direction * range, Color.red, 2f);
             Health health = hit.transform.GetComponent<Health>();
             if (health != null)
             {

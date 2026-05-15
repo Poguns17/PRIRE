@@ -930,19 +930,6 @@ MonoBehaviour:
   Weapons:
   - {fileID: 1266768548}
   - {fileID: 87401050}
---- !u!114 &1284288301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1284288286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40d3326021bdba24fa200a4cf7ea6726, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHealth: 100
 --- !u!4 &1504909045 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6953829805403472755, guid: 328fd26f64d24924f9a343b158c764e3, type: 3}
@@ -1144,9 +1131,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8644912978153500612, guid: 328fd26f64d24924f9a343b158c764e3, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1284288297}
-    - targetCorrespondingSourceObject: {fileID: 8644912978153500612, guid: 328fd26f64d24924f9a343b158c764e3, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1284288301}
   m_SourcePrefab: {fileID: 100100000, guid: 328fd26f64d24924f9a343b158c764e3, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

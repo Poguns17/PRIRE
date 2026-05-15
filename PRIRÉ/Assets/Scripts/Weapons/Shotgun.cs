@@ -25,8 +25,8 @@ public class Shotgun : BaseWeapon
         if (!CanShoot()) return;
         ammoCount--;
         lastFireTime = Time.time;
-        PlaySound(shootSound);
-        muzzleFlash?.Play();
+        //PlaySound(shootSound);
+        //muzzleFlash?.Play();
 
         // Fire each pellet with a random spread
         for (int i = 0; i < pelletsPerShot; i++)

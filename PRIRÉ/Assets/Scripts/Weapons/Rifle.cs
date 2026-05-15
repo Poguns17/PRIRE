@@ -29,8 +29,9 @@ public class Rifle : BaseWeapon
         if (!CanShoot()) return;
         ammoCount--;
         lastFireTime = Time.time;
-        PlaySound(shootSound);
-        muzzleFlash?.Play();
+        //PlaySound(shootSound);
+        //muzzleFlash?.Play();
+        
         FireRaycast(Camera.main.transform.position, Camera.main.transform.forward);
         Debug.Log($"[Rifle] Fired. Ammo: {ammoCount}/{ammoCapacity}");
     }
