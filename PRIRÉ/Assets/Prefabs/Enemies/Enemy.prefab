@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 3901255998207261452}
   - component: {fileID: -4520651777137595360}
   - component: {fileID: 3407145131009750382}
+  - component: {fileID: 6694054256164323073}
+  - component: {fileID: 6062888594395583511}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -164,3 +166,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b70e5683fcc5cb458b9cc2923702e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  damage: 10
+  attackRange: 2
+  attackCooldown: 1
+--- !u!114 &6694054256164323073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4807386080692820635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec34b8a1bf94e84aa050f53814a4b85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyXP
+  xpReward: 50
+--- !u!114 &6062888594395583511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4807386080692820635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40d3326021bdba24fa200a4cf7ea6726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  maxHealth: 100

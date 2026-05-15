@@ -94,6 +94,12 @@ public abstract class BaseWeapon : MonoBehaviour, IWeapon, IDamageSource
             if (health != null)
             {
                 health.TakeDamage(this, direction);
+                HUDManager hud = FindObjectOfType<HUDManager>();
+
+                if (hud != null)
+{
+                    hud.ShowHit();
+}
                 Debug.Log($"[{Name}] Hit {hit.transform.name} for {damage} damage.");
             }
         }
