@@ -1355,7 +1355,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpawnManager
   cellSize: 1
   plane: {fileID: 2106101819}
-  enemyPrefab: {fileID: 4807386080692820635, guid: 08284915c1ee8e14c8e69483d80a9863, type: 3}
+  enemyPrefabs:
+  - {fileID: 6423403879286395854, guid: 68a45b7c7de96f84bb3192731ba3a68c, type: 3}
+  - {fileID: 9203938796069245880, guid: b100033bd257c8e479a5c0a5b148fa2c, type: 3}
+  - {fileID: 8954800359469898617, guid: d0689260bad5ace43851bc4ad441f23d, type: 3}
+  - {fileID: 8747757470087523455, guid: 98a93bca5029d9f4b87c420c0e2ee583, type: 3}
+  - {fileID: 1045583631839351886, guid: e5ee9efbfc920f245962816752e72e91, type: 3}
+  - {fileID: 6466474970774430903, guid: 766762930a40b174c8956cdf3007423e, type: 3}
+  - {fileID: 3985757784934188552, guid: 04b2d16e1c1a3ff44b840552be5592c0, type: 3}
+  - {fileID: 3553767060735298535, guid: ef18b671ee08e3f48bb32dae8e32e51f, type: 3}
+  - {fileID: 4528888763381533394, guid: 0e984e923d84c6644a3633bbbc1127b9, type: 3}
   enemyLimit: 30
   respawnDelay: 2
   groundLayer:
