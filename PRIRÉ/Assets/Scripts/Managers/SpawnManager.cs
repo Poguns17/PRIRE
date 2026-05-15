@@ -5,7 +5,7 @@ public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private float cellSize = 5f;
     [SerializeField] private Transform plane;
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private int enemyLimit = 5;
     [SerializeField] private float respawnDelay = 2f;
     [SerializeField] private LayerMask groundLayer;
@@ -108,7 +108,8 @@ public class SpawnManager : MonoBehaviour
         if (enemyPool.Count >= enemyLimit)
             return null;
 
-        GameObject newEnemy = Instantiate(enemyPrefab);
+        int randomIndex = Random.Range(0, enemyPrefabs.Length);
+        GameObject newEnemy = Instantiate(enemyPrefabs[randomIndex]);
         enemyPool.Add(newEnemy);
 
         Health health = newEnemy.GetComponent<Health>();
