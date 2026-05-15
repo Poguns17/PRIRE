@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System;
 using System.Collections;
 
 public class HUDManager : MonoBehaviour
@@ -13,161 +14,155 @@ public class HUDManager : MonoBehaviour
     public TMP_Text hitMarkerText;
     public TMP_Text killMarkerText;
 
-    [Header("Game Values")]
+    [Header("Wave Settings")]
     public int wave = 1;
     public int enemies = 10;
-    public int xp = 0;
 
-    public int currentAmmo = 30;
+    // Current weapon
+    private BaseWeapon currentWeapon;
 
-    public int magazineSize = 30;
-    public int reserveAmmo = 120;
+    // Player health system
+    private PlayerHealth playerHealth;
 
-    public int health = 100;
-
-     void Start()
-
+    void Start()
     {
-
+        // Find player health automatically
+        playerHealth = FindObjectOfType<PlayerHealth>();
+        
+        // Hide markers at start
         reloadText.gameObject.SetActive(false);
-
         hitMarkerText.gameObject.SetActive(false);
-
         killMarkerText.gameObject.SetActive(false);
 
         UpdateHUD();
-
     }
 
     void Update()
     {
-        // TEST XP
-        if (Input.GetKeyDown(KeyCode.X))
+        // Automatically find active weapon
+        BaseWeapon[] weapons = FindObjectsOfType<BaseWeapon>();
+
+        foreach (BaseWeapon weapon in weapons)
         {
-            xp += 50;
-            UpdateHUD();
-        }
-
-        // TEST ENEMY KILL
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            enemies--;
-
-            xp += 100;
-
-            if (enemies <= 0)
+            if (weapon.gameObject.activeInHierarchy)
             {
-                wave++;
-                enemies = 10;
-            }
-
-            UpdateHUD();
-        }
-
-        // SHOOT
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (currentAmmo > 0)
-            {
-                currentAmmo--;
-                UpdateHUD();
-                StartCoroutine(ShowHitMarker());
+                currentWeapon = weapon;
+                break;
             }
         }
 
-        // RELOAD
+        // Reload display
         if (Input.GetKeyDown(KeyCode.R))
         {
-            StartCoroutine(Reload());
+            StartCoroutine(ShowReload());
         }
 
-        // DAMAGE TEST
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            health -= 10;
-
-            if (health < 0)
-                health = 0;
-
-            UpdateHUD();
-
-            StopCoroutine("RegenerateHealth");
-            StartCoroutine("RegenerateHealth");
-        }
+        UpdateHUD();
     }
 
     void UpdateHUD()
     {
-        // Wave + Enemy Count
+        // Wave + enemies
         waveText.text = "W" + wave + " - " + enemies;
 
         // XP
-        xpText.text = "XP: " + xp;
+        if (XPSystem.Instance != null)
+        {
+            xpText.text = "XP: " + XPSystem.Instance.TotalXP;
+        }
+        else
+        {
+            xpText.text = "XP: 0";
+        }
 
         // Ammo
-        ammoText.text = currentAmmo + " / " + reserveAmmo;
-
-        //  Health Bar
-        string healthBar = "";
-
-        int bars = health / 15;
-
-        for (int i = 0; i < bars; i++)
+        if (currentWeapon != null)
         {
-            healthBar += "█";
+            ammoText.text =
+                currentWeapon.AmmoCount +
+                " / " +
+                currentWeapon.AmmoCapacity;
+        }
+        else
+        {
+            ammoText.text = "-- / --";
         }
 
-        healthText.text = "HP " + healthBar;
+        // Health
+        if (playerHealth != null)
+        {
+            int bars = Mathf.RoundToInt(playerHealth.CurrentHealth / 20f);
+
+            string healthBar = "";
+
+            for (int i = 0; i < bars; i++)
+            {
+                healthBar += "█";
+            }
+
+            healthText.text = "HP " + healthBar;
+        }
     }
 
-  IEnumerator Reload()
-{
-    reloadText.gameObject.SetActive(true);
-
-    yield return new WaitForSeconds(2f);
-
-    currentAmmo = 30;
-
-    reloadText.gameObject.SetActive(false);
-
-    UpdateHUD();
-}
-
-    IEnumerator RegenerateHealth()
+    IEnumerator ShowReload()
     {
-        yield return new WaitForSeconds(5f);
+        reloadText.gameObject.SetActive(true);
 
-        while (health < 100)
-        {
-            health += 5;
+        yield return new WaitForSeconds(2f);
 
-            if (health > 100)
-                health = 100;
-
-            UpdateHUD();
-
-            yield return new WaitForSeconds(0.2f);
-        }
+        reloadText.gameObject.SetActive(false);
     }
+
     IEnumerator ShowHitMarker()
-{
-    hitMarkerText.gameObject.SetActive(true);
-
-    yield return new WaitForSeconds(0.1f);
-
-    hitMarkerText.gameObject.SetActive(false);
-
-}
-  IEnumerator ShowKillMarker()
-
     {
+        hitMarkerText.gameObject.SetActive(true);
 
+        yield return new WaitForSeconds(0.1f);
+
+        hitMarkerText.gameObject.SetActive(false);
+    }
+
+    IEnumerator ShowKillMarker()
+    {
         killMarkerText.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(0.3f);
 
         killMarkerText.gameObject.SetActive(false);
-
     }
 
+    // Called when enemy is hit
+    public void ShowHit()
+    {
+        StartCoroutine(ShowHitMarker());
+    }
+
+    // Called when enemy dies
+    public void ShowKill()
+    {
+        StartCoroutine(ShowKillMarker());
+    }
+
+    // Called when enemy dies
+    public void EnemyKilled()
+    {
+        enemies--;
+
+        if (enemies <= 0)
+        {
+            wave++;
+            enemies = 10;
+        }
+
+        UpdateHUD();
+    }
+
+    private void OnGUI()
+    {
+        float size = 10f;
+        float x = Screen.width / 2 - size / 2;
+        float y = Screen.height / 2 - size / 2;
+        GUI.Box(new Rect(x, y, size, size), "");
+
+    }
 }

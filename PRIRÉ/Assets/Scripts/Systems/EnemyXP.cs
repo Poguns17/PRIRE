@@ -24,10 +24,21 @@ public class EnemyXP : MonoBehaviour
 
     private void HandleDeath(Vector3 position, DamageType type)
     {
+        // Add XP
         if (XPSystem.Instance != null)
         {
             XPSystem.Instance.AddXP(xpReward);
-            Debug.Log($"[EnemyXP] {gameObject.name} gave {xpReward} XP.");
         }
+
+        // Update HUD
+        HUDManager hud = FindObjectOfType<HUDManager>();
+
+        if (hud != null)
+        {
+            hud.ShowKill();
+            hud.EnemyKilled();
+        }
+
+        Debug.Log("Enemy killed. +" + xpReward + " XP");
     }
 }
